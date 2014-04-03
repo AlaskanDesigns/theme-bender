@@ -33,8 +33,10 @@ DEFINES
     osc_enqueue_script('fancybox');
     // used for date/dateinterval custom fields
     osc_enqueue_script('php-date');
-    osc_enqueue_style('fine-uploader-css', osc_assets_url('js/fineuploader/fineuploader.css'));
-    osc_enqueue_style('bender-fine-uploader-css', osc_current_web_theme_url('css/ajax-uploader.css'));
+    if(!OC_ADMIN) {
+        osc_enqueue_style('fine-uploader-css', osc_assets_url('js/fineuploader/fineuploader.css'));
+        osc_enqueue_style('bender-fine-uploader-css', osc_current_web_theme_url('css/ajax-uploader.css'));
+    }
     osc_enqueue_script('jquery-fineuploader');
 
 
@@ -553,7 +555,7 @@ function bender_sidebar_category_search($catId = null)
         end($aCategories);
         $cat = current($aCategories);
         // if is parent of some category
-        $childCategories = Category::newInstance()->findSubcategories($cat['pk_i_id']);
+        $childCategories = Category::newInstance()->findSubcategoriesEnabled($cat['pk_i_id']);
         if(count($childCategories) > 0) {
             $aCategories[] = $childCategories;
         }

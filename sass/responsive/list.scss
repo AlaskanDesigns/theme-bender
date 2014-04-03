@@ -31,6 +31,7 @@ body.search .listing-grid .listing-card{
     text-overflow: ellipsis;
     width: 100%;
     display: block;
+	clear: both;
 }
 .listing-grid .listing-card:nth-child(3n),
 body.search .listing-card:nth-child(3n){
